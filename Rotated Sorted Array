@@ -38,3 +38,47 @@ return min
 # else:
 # l = m + 1
 # return -1
+
+# Allowing duplicates
+
+class Solution:
+# @param num, a list of integer
+# @return an integer
+def findMin(self, num):
+if not num: return -1
+l, r = 0, len(num) - 1
+min = num[0]
+while l <= r:
+m = (l + r)//2
+if num[l] < num[m]:
+min = min if num[l] > min else num[l]
+l = m + 1
+elif num[l] > num[m]:
+min = min if num[m] > min else num[m]
+r = m - 1
+else:
+min = min if num[m] > min else num[m]
+l += 1
+return min
+
+
+def search(self, A, target):
+if not A: return False
+l = 0; r = len(A) - 1
+while l <= r:
+m = (l + r)//2
+if A[m] == target:
+return True
+elif A[l] < A[m]:
+if A[l] <= target and target < A[m]:
+r = m - 1
+else:
+l = m + 1
+elif A[l] > A[m]:
+if A[m] < target and target <= A[r]:
+l = m + 1
+else:
+r = m - 1
+else:
+l += 1
+return False
