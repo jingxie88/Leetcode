@@ -1,17 +1,18 @@
 # If M defined as Left Mid, then always compare the values between M and Right. 
-# To avoid case like [2,1] where L coincides with M.
+# To avoid case like [2,1] where L coincides with M. 
+# M can never conincides R except length 1.
 
 def findMin(self, num):
 if not num: return -1
 min = num[0]
 l = 0; r = len(num) - 1
-while l <= r:
+while l <= r: # or l<r ?!
 m = (l + r)//2
 if num[m] < num[r]:
 min = min if min < num[m] else num[m]
 r = m - 1
 else:
-min = min if min < num[l] else num[l]
+min = min if min < num[r] else num[r]
 l = m + 1
 return min
 
