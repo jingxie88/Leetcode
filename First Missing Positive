@@ -11,17 +11,16 @@ class Solution:
                 return i + 1
         return len(A) + 1
         
-# My way! More efficient way! Avoid unneccesary swaps! Allow -1, 5, 4, 3, 1
+# My way! More efficient way! Avoid unneccesary swaps! Allow -1, 5, 4, 8, 1
 
 class Solution:
     def firstMissingPositive(self, A):
         i = 0
         for i in range(len(A)): 
-        j = i
-        while A[A[j] - 1] != A[j]:
-          t = A[A[j] - 1] - 1
-          A[A[j] - 1] = A[j]
-          j = t
+            j = i
+            while A[j] > 0 and A[j] <= len(A) and A[A[j] - 1] != A[j]:
+            t, A[A[j] - 1] = A[A[j] - 1] - 1, A[j]
+            j = t
         for i in range(len(A)):
             if A[i] != i + 1:
                 return i + 1
