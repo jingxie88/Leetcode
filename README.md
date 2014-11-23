@@ -9,3 +9,5 @@ Gas Station:
 
 First Missing Positive: assume sorted array starts from 1!!!
 If a[i]=k but a[k-1]=k already, then assign a[i]=0 or -1! In the final step check the first place of 0/-1.
+
+Jump Game: any point <= reachable is reachable!! 
