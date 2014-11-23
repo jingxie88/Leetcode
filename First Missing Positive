@@ -2,26 +2,38 @@ class Solution:
     def firstMissingPositive(self, A):
         i = 0
         while i < len(A):
-            if A[i] > 0 and A[i] - 1 < len(A) and A[A[i] - 1] != A[i]:
+            if A[i] > 0 and A[i] - 1 < len(A) and A[A[i] - 1] != A[i]: # case A[j]=j+1 check is included !
                 A[A[i] - 1], A[i] = A[i], A[A[i] - 1]
             else:
-                i += 1
+                i += 1 # wrong!
         for i in range(len(A)):
             if A[i] != i + 1:
                 return i + 1
         return len(A) + 1
         
-# My way! More efficient way! Avoid unneccesary swaps! Allow -1, 5, 4, 8, 1
-
-class Solution:
-    def firstMissingPositive(self, A):
-        i = 0
-        for i in range(len(A)): 
-            j = i
-            while j >= 0 and j < len(A) and A[j] > 0 and A[j] <= len(A) and A[A[j] - 1] != A[j]: # case A[j]=j+1 check is included !
-                t, A[A[j] - 1] = A[A[j] - 1] - 1, A[j]
-                j = t
-        for i in range(len(A)):
-            if A[i] != i + 1:
-                return i + 1
-        return len(A) + 1
+# Correct way! Avoid unneccesary swaps! Allow -1, 5, 4, 8, 1
+def firstMissingPositive(self, A):
+       if not A: return 1
+       
+       i = 0
+       
+#        WRONG !!! i -= 1 cannot change i in xrange
+#        for i in xrange(len(A)):
+       while i < len(A): 
+#            WRONG !!! we update A[i] first, then use A[i] in A[A[i] - 1]
+#            if A[i] != i + 1 and A[i] > 0 and A[i] < len(A) and A[A[i] - 1] != A[i]:
+#                temp = A[i]
+#                A[i] = A[A[i] - 1]
+#                A[A[i] - 1] = temp
+       
+           if A[i] > 0 and A[i] < len(A) and A[i] != A[A[i] - 1]:
+               A[A[i] - 1], A[i] = A[i], A[A[i] - 1]
+#                WRONG!!! need to go back
+               i -= 1
+           i += 1
+       
+       for i in xrange(len(A)):
+           if A[i] != i + 1:
+               return i + 1
+       
+       return len(A) + 1
